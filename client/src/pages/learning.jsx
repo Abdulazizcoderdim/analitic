@@ -8,6 +8,7 @@ const Learning = () => {
     'https://cdn.analiticbet.ru/f1a2f9bbf4516450aea253ef89e28efd/learn/1.mp4',
     'https://cdn.analiticbet.ru/f1a2f9bbf4516450aea253ef89e28efd/learn/1.mp4',
   ]);
+
   return (
     <MaxWidth className="py-20 bg-middleBlue">
       <div className="bg-white rounded-lg shadow-lg p-10 space-y-5">
