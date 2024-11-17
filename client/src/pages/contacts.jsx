@@ -3,8 +3,7 @@ import { useEffect } from 'react';
 const Contacts = () => {
   useEffect(() => {
     const script = document.createElement('script');
-    script.src =
-      'https://api-maps.yandex.ru/2.1/?apikey=dict.1.1.20241113T141513Z.93c3775c5a033ff2.da9ebcb65d7a1c083f492ca352c42528d1e6978f&lang=ru_RU';
+    script.src = import.meta.env.VITE_PUBLIC_YANDEX_API_KEY;
     script.async = true;
     document.body.appendChild(script);
 
@@ -47,7 +46,7 @@ const Contacts = () => {
         <div className="grid gap-8 lg:grid-cols-2">
           {/* Yandex Map */}
           <div id="yandex-map" className="min-h-[400px] rounded-lg"></div>
-          {/* Contact Information */} 
+          {/* Contact Information */}
           <div className="space-y-6">
             <div>
               <h2 className="mb-2 text-sm font-medium uppercase text-gray-500">
