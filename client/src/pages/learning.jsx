@@ -4,9 +4,9 @@ import DocumentationLayout from './DocumentationLayout';
 
 const Learning = () => {
   const [videos] = useState([
-    'https://cdn.analiticbet.ru/f1a2f9bbf4516450aea253ef89e28efd/e50a268fccebb1e9e1329a7ef01ea72d.mp4',
-    'https://cdn.analiticbet.ru/f1a2f9bbf4516450aea253ef89e28efd/9cafe82416d1da770691953d1e54ccf0.mp4',
-    'https://cdn.analiticbet.ru/f1a2f9bbf4516450aea253ef89e28efd/8dcea3230081bce86225e68d9804afa5.mp4',
+    'https://cdn.analiticbet.ru/f1a2f9bbf4516450aea253ef89e28efd/learn/1.mp4',
+    'https://cdn.analiticbet.ru/f1a2f9bbf4516450aea253ef89e28efd/learn/1.mp4',
+    'https://cdn.analiticbet.ru/f1a2f9bbf4516450aea253ef89e28efd/learn/1.mp4',
   ]);
   return (
     <MaxWidth className="py-20 bg-middleBlue">
@@ -20,7 +20,7 @@ const Learning = () => {
           {videos.map((video, index) => (
             <div
               key={index}
-              className="aspect-video mx-auto relative rounded-lg overflow-hidden bg-black/10 min-h-52 w-72"
+              className="aspect-video mx-auto relative rounded-lg overflow-hidden bg-black/10 min-h-52 max-w-96 w-full"
             >
               <video
                 className="w-full h-full object-cover"

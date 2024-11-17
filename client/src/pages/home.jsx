@@ -15,6 +15,25 @@ const Home = () => {
   //     localStorage.setItem('hasVisited', 'true');
   //   }
   // }, []);
+  const months = [
+    'Января',
+    'Февраля',
+    'Марта',
+    'Апреля',
+    'Мая',
+    'Июня',
+    'Июля',
+    'Августа',
+    'Сентября',
+    'Октября',
+    'Ноября',
+    'Декабря',
+  ];
+
+  const currentDate = new Date();
+  const day = currentDate.getDate();
+  const month = months[currentDate.getMonth()];
+  const year = currentDate.getFullYear();
 
   return (
     <>
@@ -68,7 +87,7 @@ const Home = () => {
         </MaxWidth>
         <MaxWidth className="bg-lighBlue md:py-40 py-10 flex max-md:flex-col-reverse items-center gap-16  mt-5">
           <div className="md:w-1/2 w-full min-h-64 bg-white rounded-md text-black px-10 py-7">
-            <h1 className="text-center font-bold">10 Ноября 2024</h1>
+            <h1 className="text-center font-bold">{`${day} ${month} ${year}`}</h1>
             <div className="flex justify-between border-t px-1 py-2 mt-5">
               <p className="w-1/2">Вид спорта </p>
               <p className="font-bold w-1/2 text-start">⚽ Футбол</p>

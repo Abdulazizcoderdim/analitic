@@ -6,11 +6,11 @@ import BookmakersTable from '../pages/firm';
 import Giveaway from '../pages/giveaway';
 import History from '../pages/history';
 import Home from '../pages/home';
-import Learning from '../pages/learning';
 import Recovery from '../pages/Recovery';
 import Register from '../pages/register';
 import Reviews from '../pages/reviews';
 import Tariffs from '../pages/tariffs';
+import Learning from '../pages/learning';
 
 export const router = createBrowserRouter([
   {
