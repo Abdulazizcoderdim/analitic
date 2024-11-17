@@ -7,7 +7,6 @@ const App = () => {
     <>
       <RouterProvider router={router} />
       <Provider />
-      
     </>
   );
 };
