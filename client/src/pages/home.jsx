@@ -1,22 +1,20 @@
-import { useEffect, useState } from 'react';
 import { FaCheck } from 'react-icons/fa6';
 import AnaliticByMonth from '../components/shared/analitic-by-month';
-import FollowModal from '../components/shared/follow-modal';
 import MaxWidth from '../components/shared/max-width';
 import Reviews from '../components/shared/Reviews';
 
 const Home = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    const hasVisited = localStorage.getItem('hasVisited');
+  // useEffect(() => {
+  //   const hasVisited = localStorage.getItem('hasVisited');
 
-    if (!hasVisited) {
-      // User is visiting for the first time
-      setIsModalOpen(true);
-      localStorage.setItem('hasVisited', 'true');
-    }
-  }, []);
+  //   if (!hasVisited) {
+  //     // User is visiting for the first time
+  //     setIsModalOpen(true);
+  //     localStorage.setItem('hasVisited', 'true');
+  //   }
+  // }, []);
 
   return (
     <>
@@ -112,7 +110,7 @@ const Home = () => {
           />
         </div>
       </div>
-      {isModalOpen && <FollowModal setFollow={setIsModalOpen} />}
+      {/* {isModalOpen && <FollowModal setFollow={setIsModalOpen} />} */}
     </>
   );
 };
