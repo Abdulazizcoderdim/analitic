@@ -26,7 +26,6 @@ class AuthController {
         return res.status(400).json({ message: 'Email or phone is required' });
       }
 
-
       const data = await authService.register(emailOrPhone, password);
 
       res.cookie('refreshToken', data.refreshToken, {
@@ -38,19 +37,6 @@ class AuthController {
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: error.message || 'Server error' });
-    }
-  }
-
-  async activation(req, res) {
-    try {
-      const userId = req.params.id;
-
-      await authService.activation(userId);
-
-      return res.redirect(process.env.CLIENT_URL);
-    } catch (error) {
-      res.status(500).json({ message: 'Server error' });
-      console.log(error);
     }
   }
 

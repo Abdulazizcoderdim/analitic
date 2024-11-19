@@ -1,14 +1,53 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import { authStore } from '../store/auth.store';
 
 export default function Auth() {
   const [activeTab, setActiveTab] = useState('phone');
   const [phoneOrEmail, setPhoneOrEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { setIsAuth, setUser } = authStore();
+  const navigate = useNavigate();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    console.log('Form submitted:', { phoneOrEmail, password });
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        `{${import.meta.env.VITE_PUBLIC_API}/api/auth/login}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            emailOrPhone: phoneOrEmail,
+            password: password,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Ошибка авторизации');
+      }
+
+      setIsAuth(true);
+      setUser(data.user);
+      localStorage.setItem('accessToken', data.accessToken);
+      localStorage.setItem('user', data.user.emailOrPhone);
+      toast.success('Вы успешно вошли в систему!');
+      navigate('/');
+    } catch (err) {
+      console.error('Ошибка:', err);
+      toast.error(err.message || 'Ошибка авторизации');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -48,6 +87,7 @@ export default function Auth() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <input
+                required
                 type={activeTab === 'phone' ? 'tel' : 'email'}
                 placeholder={
                   activeTab === 'phone' ? 'Номер телефона' : 'Введите Email'
@@ -59,6 +99,7 @@ export default function Auth() {
             </div>
             <div>
               <input
+                required
                 type="password"
                 placeholder="Введите пароль"
                 className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-teal-500"
@@ -70,7 +111,7 @@ export default function Auth() {
               type="submit"
               className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-4 rounded-md transition-colors"
             >
-              Вход на сайт
+              {loading ? 'Загрузка...' : 'Вход на сайт'}
             </button>
           </form>
 

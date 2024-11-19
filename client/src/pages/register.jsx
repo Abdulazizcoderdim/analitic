@@ -1,17 +1,73 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import { authStore } from '../store/auth.store';
 
 const Register = () => {
   const [activeTab, setActiveTab] = useState('phone');
   const [contact, setContact] = useState('');
+  const [password, setPassword] = useState('');
   const [agreements, setAgreements] = useState({
     terms: false,
     subscription: false,
   });
+  const [loading, setLoading] = useState(false);
+  const { setIsAuth, setUser } = authStore();
+  const navigate = useNavigate();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    console.log('Form submitted:', { contact, agreements });
+
+    // Validate agreements
+    if (!agreements.terms || !agreements.subscription) {
+      // setErrorMessage('');
+      toast.success('Вы должны согласиться с правилами.');
+      return;
+    }
+
+    // Build request body
+    const requestBody = {
+      emailOrPhone: contact,
+      password: password,
+    };
+
+    setLoading(true);
+
+    try {
+      const response = await fetch(
+        `{${import.meta.env.VITE_PUBLIC_API}/api/auth/register}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestBody),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Ошибка при отправке данных.');
+      }
+
+      const data = await response.json();
+      // setSuccessMessage('Успешная регистрация!');
+      toast.success('Успешная регистрация!');
+
+      setUser(data.user);
+      setIsAuth(true);
+      localStorage.setItem('accessToken', data.accessToken);
+      localStorage.setItem('user', data.user.emailOrPhone);
+      console.log('API Response:', data);
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+      toast.error(
+        error.message || 'Ошибка при регистрации. Попробуйте еще раз.'
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -20,25 +76,6 @@ const Register = () => {
         <div className="text-center text-white mb-8">
           <h1 className="text-4xl font-bold mb-2">РЕГИСТРАЦИЯ</h1>
           <p className="text-lg">Через email или телефон</p>
-        </div>
-
-        {/* Promo Banner */}
-        <div className="bg-[#fff9e6] border border-[#ffe4b3] max-w-80 mx-auto rounded-lg p-4 mb-6">
-          <div className="relative">
-            <span className="absolute -top-3 right-0 bg-green-500 text-white text-xs px-2 py-0.5 rounded">
-              Акция!
-            </span>
-            <h3 className="text-center text-xs font-medium text-amber-800 mb-2">
-              Доступ всего за 1 руб!
-            </h3>
-            <p className="text-xs text-amber-700 text-center">
-              Окончание акции 13.11.2024 в 12:00 Успей купить за 1 рубль!
-            </p>
-            <p className="text-xs text-amber-700 text-center">
-              Пробный доступ предоставляется на 5 дней, далее продлевается по
-              499 руб каждые 5 дней. Зарабатывай сейчас, а плати потом!
-            </p>
-          </div>
         </div>
 
         <div className="bg-white rounded-lg p-8">
@@ -79,6 +116,17 @@ const Register = () => {
               />
             </div>
 
+            <div>
+              <input
+                type="password"
+                placeholder="Пароль"
+                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-teal-500"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                required
+              />
+            </div>
+
             <div className="space-y-4">
               <label className="flex items-start gap-2">
                 <input
@@ -94,9 +142,7 @@ const Register = () => {
                   required
                 />
                 <span className="text-xs text-gray-600">
-                  СОГЛАШАЮСЬ С ПРАВИЛАМИ ЛИЦЕНЗИОННОГО ДОГОВОРА ОФЕРТЫ И
-                  УСЛОВИЯМИ ПРЕДОСТАВЛЕНИЯ УСЛУГ ПО ПЛАТНОЙ ПОДПИСКЕ НА
-                  АНАЛИТИКУ, С ПОЛИТИКОЙ КОНФИДЕНЦИАЛЬНОСТИ ОЗНАКОМЛЕН(А).
+                  СОГЛАШАЮСЬ С ПРАВИЛАМИ ЛИЦЕНЗИОННОГО ДОГОВОРА.
                 </span>
               </label>
 
@@ -114,16 +160,7 @@ const Register = () => {
                   required
                 />
                 <span className="text-xs text-gray-600">
-                  СОГЛАСЕН С ПРАВИЛАМИ ПРЕДОСТАВЛЕНИЯ ДОСТУПА К СЕРВИСУ ПО
-                  ПОДПИСКЕ С ИСПОЛЬЗОВАНИЕМ АВТОПЛАТЕЖА И УВЕДОМЛЕН О
-                  ПОДКЛЮЧЕНИИ ПЛАТНОЙ ПОДПИСКИ СТОИМОСТЬЮ{' '}
-                  <span className="font-bold">
-                    1 РУБ. ЗА ПЕРВЫЕ 5 ДНЕЙ ДОСТУПА
-                  </span>
-                  , ДАЛЕЕ С ПОДКЛЮЧЕННОЙ КАРТЫ СПИСЫВАЕТСЯ{' '}
-                  <span className="font-bold">499 РУБ. ЗА КАЖДЫЕ 5 ДНЕЙ</span>{' '}
-                  ДЛЯ ТАРИФА МСК, И <span className='font-bold'>1499 РУБ. ЗА КАЖДЫЕ 5 ДНЕЙ</span> ДЛЯ
-                  ТАРИФА COMBO.
+                  СОГЛАСЕН С УСЛОВИЯМИ ПОДПИСКИ.
                 </span>
               </label>
             </div>
@@ -131,8 +168,9 @@ const Register = () => {
             <button
               type="submit"
               className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-4 rounded-md transition-colors"
+              disabled={loading}
             >
-              Зарегистрироваться
+              {loading ? 'Отправка...' : 'Зарегистрироваться'}
             </button>
           </form>
 
@@ -149,4 +187,5 @@ const Register = () => {
     </div>
   );
 };
+
 export default Register;
