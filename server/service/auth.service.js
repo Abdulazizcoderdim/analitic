@@ -12,11 +12,11 @@ class AuhtService {
       throw new Error('User not found');
     }
 
-    // const isPassword = await bcrypt.compare(password, user.password);
+    const isPassword = await bcrypt.compare(password, user.password);
 
-    // if (!isPassword) {
-    //   throw new Error('Invalid password');
-    // }
+    if (!isPassword) {
+      throw new Error('Invalid password');
+    }
 
     const userDto = new UserDto(user);
 
@@ -31,18 +31,21 @@ class AuhtService {
     return await tokenService.removeToken(refreshToken);
   }
 
-  async register(emailOrPhone) {
-    if (!emailOrPhone) {
-      throw new Error('Email or phone is required');
+  async register(emailOrPhone, password) {
+    if (!emailOrPhone || !password) {
+      throw new Error('Email or phone or password is required');
     }
 
     const existUser = await User.findOne({ emailOrPhone });
 
     if (existUser) {
-      return existUser;
+      throw new Error('User already exists');
     }
 
-    const user = await User.create({ emailOrPhone });
+    const hashPassword = await bcrypt.hash(password, 10);
+
+    const user = await User.create({ emailOrPhone, password: hashPassword });
+
     const userDto = new UserDto(user);
 
     // if (emailOrPhone && emailOrPhone.includes('@')) {
@@ -73,8 +76,6 @@ class AuhtService {
 
     return user;
   }
-
-  
 }
 
 module.exports = new AuhtService();

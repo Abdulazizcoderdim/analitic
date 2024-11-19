@@ -20,14 +20,14 @@ class AuthController {
 
   async register(req, res) {
     try {
-      const { emailOrPhone } = req.body;
+      const { emailOrPhone, password } = req.body;
 
       if (!emailOrPhone) {
         return res.status(400).json({ message: 'Email or phone is required' });
       }
 
 
-      const data = await authService.register(emailOrPhone);
+      const data = await authService.register(emailOrPhone, password);
 
       res.cookie('refreshToken', data.refreshToken, {
         httpOnly: true,

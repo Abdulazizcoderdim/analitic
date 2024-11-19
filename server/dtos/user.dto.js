@@ -6,6 +6,5 @@ module.exports = class UserDto {
   constructor(model) {
     this.id = model._id;
     this.emailOrPhone = model.emailOrPhone;
-    this.password = model.password;
   }
 };
