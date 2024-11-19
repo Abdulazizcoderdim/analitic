@@ -35,7 +35,7 @@ const Register = () => {
 
     try {
       const response = await fetch(
-        `{${import.meta.env.VITE_PUBLIC_API}/api/auth/register}`,
+        `${import.meta.env.VITE_PUBLIC_API}` + '/api/auth/register',
         {
           method: 'POST',
           headers: {
