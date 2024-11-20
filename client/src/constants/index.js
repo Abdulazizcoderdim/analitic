@@ -1,3 +1,15 @@
+import {
+  Gem,
+  LaptopMinimal,
+  Layers,
+  Lightbulb,
+  MessageSquareText,
+  Redo,
+  RussianRuble,
+  SquareUserRound,
+  Users,
+} from 'lucide-react';
+
 export const navItems = [
   {
     title: 'Тарифы',
@@ -93,5 +105,53 @@ export const stats = [
     passRate: '64%',
     avgCoef: '2.2',
     percentage: '+247%',
+  },
+];
+
+export const dashboardMenu = [
+  {
+    title: 'Обзор',
+    link: '/dashboard',
+    icon: LaptopMinimal,
+  },
+  {
+    title: 'Потоки',
+    link: '/dashboard/streams',
+    icon: Layers,
+  },
+  {
+    title: 'Регистрации',
+    link: '/dashboard/users',
+    icon: Users,
+  },
+  {
+    title: 'Postback',
+    link: '/dashboard/postbacks',
+    icon: Redo,
+  },
+  {
+    title: 'Выплаты',
+    link: '/dashboard/payout',
+    icon: Gem,
+  },
+  {
+    title: 'Приведи друга',
+    link: '/dashboard/ref',
+    icon: SquareUserRound,
+  },
+  {
+    title: 'Уровни отчислений',
+    link: '/dashboard/levels',
+    icon: RussianRuble,
+  },
+  {
+    title: 'Вопросы и ответы',
+    link: '/dashboard/help',
+    icon: Lightbulb,
+  },
+  {
+    title: 'Поддержка',
+    link: '/dashboard/contacts',
+    icon: MessageSquareText,
   },
 ];
