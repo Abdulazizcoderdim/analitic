@@ -20,7 +20,6 @@ const Register = () => {
 
     // Validate agreements
     if (!agreements.terms || !agreements.subscription) {
-      // setErrorMessage('');
       toast.success('Вы должны согласиться с правилами.');
       return;
     }
@@ -35,7 +34,7 @@ const Register = () => {
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_PUBLIC_API}` + '/api/auth/register',
+        `${import.meta.env.VITE_PUBLIC_API}/api/auth/register`,
         {
           method: 'POST',
           headers: {
