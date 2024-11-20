@@ -6,14 +6,12 @@ import { router } from './routes/router';
 import { authStore } from './store/auth.store';
 
 const App = () => {
-  const { setIsAuth, user } = authStore();
+  const { setIsAuth } = authStore();
 
   useEffect(() => {
     if (localStorage.getItem('accessToken')) {
       setIsAuth(true);
     }
-
-    console.log(user);
   }, []);
 
   return (

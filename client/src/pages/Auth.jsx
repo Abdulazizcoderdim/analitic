@@ -26,7 +26,7 @@ export default function Auth() {
           body: JSON.stringify({
             emailOrPhone: phoneOrEmail,
             password: password,
-          }),
+          }), 
         }
       );
 

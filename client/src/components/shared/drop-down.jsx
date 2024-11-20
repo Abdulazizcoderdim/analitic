@@ -12,7 +12,7 @@ function Dropdown() {
 
   const logout = async () => {
     try {
-      await axios.post('http://localhost:5000/api/auth/logout');
+      await axios.post(`${import.meta.env.VITE_PUBLIC_API}/api/auth/logout`);
       localStorage.removeItem('accessToken');
       localStorage.removeItem('user');
       setIsAuth(false);
