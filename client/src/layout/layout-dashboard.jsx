@@ -6,7 +6,7 @@ const LayoutDashboard = () => {
   return (
     <div className="flex">
       <DashboardSidebar />
-      <main className="flex flex-col">
+      <main className="flex flex-col w-full">
         <DashboardHeader />
         <Outlet />
       </main>

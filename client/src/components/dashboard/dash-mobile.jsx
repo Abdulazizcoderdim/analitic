@@ -1,18 +1,15 @@
+import { X } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { dashboardMenu } from '../../constants';
+import { stateDashboard } from '../../store/dashboard';
 
-const DashboardSidebar = () => {
+const DashMobile = () => {
   const { pathname } = useLocation();
+  const { setClose } = stateDashboard();
+
   return (
-    <div className="bg-[#181722] max-md:hidden min-w-64 min-h-screen text-[#beb3b6] z-50">
-      <div className="flex items-center justify-center bg-[#1F212D] py-1">
-        <img
-          src="/logodash.png"
-          className="object-contain w-52 h-full"
-          alt="Dashboard Logo"
-        />
-      </div>
-      <ul className="px-[10px] pt-[10px]">
+    <div className="fixed z-50 top-0 bottom-0 left-0 bg-[#181722] md:hidden min-w-64 min-h-screen text-[#beb3b6]">
+      <ul className="px-[10px] pt-[10px] relative">
         {dashboardMenu.map((item, i) => {
           const isActive = pathname === item.link;
           return (
@@ -30,9 +27,15 @@ const DashboardSidebar = () => {
             </li>
           );
         })}
+        <span
+          onClick={() => setClose(true)}
+          className="absolute top-20 bg-[#2B293D] p-1 rounded-r-md cursor-pointer -right-8"
+        >
+          <X />
+        </span>
       </ul>
     </div>
   );
 };
 
-export default DashboardSidebar;
+export default DashMobile;
