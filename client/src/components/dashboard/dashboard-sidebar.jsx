@@ -3,6 +3,7 @@ import { dashboardMenu } from '../../constants';
 
 const DashboardSidebar = () => {
   const { pathname } = useLocation();
+  console.log(pathname);
   return (
     <div className="bg-[#181722] max-md:hidden min-w-64 min-h-screen text-[#beb3b6] z-50">
       <div className="flex items-center justify-center bg-[#1F212D] py-1">

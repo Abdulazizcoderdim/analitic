@@ -12,6 +12,7 @@ import Learning from '../pages/learning';
 import Recovery from '../pages/Recovery';
 import Register from '../pages/register';
 import Reviews from '../pages/reviews';
+import Streams from '../pages/Streams';
 import Tariffs from '../pages/tariffs';
 
 export const router = createBrowserRouter([
@@ -72,6 +73,10 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard',
         element: <Dashboard />,
+      },
+      {
+        path: '/dashboard/streams',
+        element: <Streams />,
       },
     ],
   },

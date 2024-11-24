@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { RouterProvider } from 'react-router-dom';
-import Provider from './components/provider';
 import { router } from './routes/router';
 import { authStore } from './store/auth.store';
 
@@ -17,7 +16,6 @@ const App = () => {
   return (
     <>
       <RouterProvider router={router} />
-      <Provider />
       <Toaster />
     </>
   );
