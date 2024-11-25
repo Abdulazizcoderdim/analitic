@@ -20,6 +20,7 @@ import Register from '../pages/register';
 import Reviews from '../pages/reviews';
 import Streams from '../pages/Streams';
 import Tariffs from '../pages/tariffs';
+import Users from '../pages/users';
 
 export const router = createBrowserRouter([
   {
@@ -107,6 +108,10 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/postbacks',
         element: <Postbacks />,
+      },
+      {
+        path: '/dashboard/users',
+        element: <Users />,
       },
     ],
   },
