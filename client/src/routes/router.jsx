@@ -13,6 +13,7 @@ import Home from '../pages/home';
 import Learning from '../pages/learning';
 import Levels from '../pages/levels';
 import Recovery from '../pages/Recovery';
+import Ref from '../pages/ref';
 import Register from '../pages/register';
 import Reviews from '../pages/reviews';
 import Streams from '../pages/Streams';
@@ -92,6 +93,10 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/levels',
         element: <Levels />,
+      },
+      {
+        path: '/dashboard/ref',
+        element: <Ref />,
       },
     ],
   },
