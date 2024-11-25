@@ -11,6 +11,7 @@ import FAQPage from '../pages/help';
 import History from '../pages/history';
 import Home from '../pages/home';
 import Learning from '../pages/learning';
+import Levels from '../pages/levels';
 import Recovery from '../pages/Recovery';
 import Register from '../pages/register';
 import Reviews from '../pages/reviews';
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/help',
         element: <FAQPage />,
+      },
+      {
+        path: '/dashboard/levels',
+        element: <Levels />,
       },
     ],
   },
