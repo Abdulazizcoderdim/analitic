@@ -12,6 +12,8 @@ import History from '../pages/history';
 import Home from '../pages/home';
 import Learning from '../pages/learning';
 import Levels from '../pages/levels';
+import Payout from '../pages/payout';
+import Postbacks from '../pages/postbacks';
 import Recovery from '../pages/Recovery';
 import Ref from '../pages/ref';
 import Register from '../pages/register';
@@ -97,6 +99,14 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/ref',
         element: <Ref />,
+      },
+      {
+        path: '/dashboard/payout',
+        element: <Payout />,
+      },
+      {
+        path: '/dashboard/postbacks',
+        element: <Postbacks />,
       },
     ],
   },

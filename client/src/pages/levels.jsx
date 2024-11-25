@@ -23,7 +23,7 @@ const Levels = () => {
         {/* Content Area */}
         <div className="bg-white rounded-lg shadow-sm p-8 pb-14">
           <h2 className="text-xl mb-6">Персональный уровень отчислений</h2>
-          <div className="border-l-4 border-blue-500 rounded-lg flex items-center shadow-lg min-h-20 pl-4">
+          <div className="border-l-4 border-blue-500 rounded-lg flex items-center shadow-lg min-h-20 py-4 pl-4">
             <p className="text-gray-600">
               Ваш персональный уровень отчислений 50% от всех платежей
               приведенных вами клиентов. <br /> Вы получаете 5% от дохода тех
