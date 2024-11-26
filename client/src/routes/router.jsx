@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
+import CreateStream from '../components/dashboard/create-stream';
 import Layout from '../layout/layout';
 import LayoutDashboard from '../layout/layout-dashboard';
 import Auth from '../pages/Auth';
@@ -74,7 +75,7 @@ export const router = createBrowserRouter([
     ],
   },
   {
-    path: '/',
+    path: '/dashboard',
     element: <LayoutDashboard />,
     children: [
       {
@@ -112,6 +113,10 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/users',
         element: <Users />,
+      },
+      {
+        path: '/dashboard/streams/create',
+        element: <CreateStream />,
       },
     ],
   },
