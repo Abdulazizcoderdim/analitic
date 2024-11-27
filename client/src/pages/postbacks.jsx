@@ -16,9 +16,12 @@ const Postbacks = () => {
           <span className="text-gray-900 cursor-pointer">Postback</span>
         </nav>
 
-        <button className="px-5 pb-2 pt-1.5 shadow-md bg-emerald-500 text-white rounded-full hover:bg-emerald-600 transition-colors">
+        <Link
+          to={'/dashboard/postbacks/create'}
+          className="px-5 pb-2 pt-1.5 shadow-md bg-emerald-500 text-white rounded-full hover:bg-emerald-600 transition-colors"
+        >
           <span className="mr-1">+</span> Создать postback
-        </button>
+        </Link>
 
         {/* Content Area */}
         <div className="bg-white rounded-lg shadow-sm p-8 pb-14 mt-10">

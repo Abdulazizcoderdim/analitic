@@ -497,3 +497,63 @@ export const datas = [
   '&utm_content= - UTM метка',
   '&utm_term= - UTM метка',
 ];
+
+export const postbackData = [
+  { key: '{stream}', desc: 'Название потока (промокода).' },
+  {
+    key: '{click_id}',
+    desc: 'Идентификатор перехода, передаваемый в партнерской ссылке в GET-параметре cid.',
+  },
+  {
+    key: '{payout}',
+    desc: 'Сумма партнерского вознаграждения за операции оплаты и повторных оплат (ребиллы).',
+  },
+  {
+    key: '{transaction_id}',
+    desc: 'Уникальный идентификатор транзакции.',
+  },
+  {
+    key: '{status}',
+    desc: 'Тип события: registration, first_buy, subscribe, unsubscribe, rebill',
+  },
+  {
+    key: '{sub1}',
+    desc: 'Значение передаваемое в &sub1',
+  },
+  {
+    key: '{sub2}',
+    desc: 'Значение передаваемое в &sub2',
+  },
+  {
+    key: '{sub3}',
+    desc: 'Значение передаваемое в &sub3',
+  },
+  {
+    key: '{sub4}',
+    desc: 'Значение передаваемое в &sub4',
+  },
+  {
+    key: '{sub5}',
+    desc: 'Значение передаваемое в &sub5',
+  },
+  {
+    key: '{utm_source}',
+    desc: 'Значение передаваемое в &utm_source',
+  },
+  {
+    key: '{utm_source}',
+    desc: 'Значение передаваемое в &utm_medium',
+  },
+  {
+    key: '{utm_campaign}',
+    desc: 'Значение передаваемое в &utm_campaign',
+  },
+  {
+    key: '{utm_content}',
+    desc: 'Значение передаваемое в &utm_content',
+  },
+  {
+    key: '{utm_term}',
+    desc: 'Значение передаваемое в &utm_term',
+  },
+];

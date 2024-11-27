@@ -58,7 +58,7 @@ const Register = () => {
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('user', data.user.emailOrPhone);
       console.log('API Response:', data);
-      navigate('/');
+      navigate('/dashboard');
     } catch (error) {
       console.log(error);
       toast.error(

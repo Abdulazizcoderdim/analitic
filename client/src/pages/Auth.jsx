@@ -26,7 +26,7 @@ export default function Auth() {
           body: JSON.stringify({
             emailOrPhone: phoneOrEmail,
             password: password,
-          }), 
+          }),
         }
       );
 
@@ -41,7 +41,7 @@ export default function Auth() {
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('user', data.user.emailOrPhone);
       toast.success('Вы успешно вошли в систему!');
-      navigate('/');
+      navigate('/dashboard');
     } catch (err) {
       console.error('Ошибка:', err);
       toast.error(err.message || 'Ошибка авторизации');

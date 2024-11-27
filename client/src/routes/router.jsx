@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
+import PostbackForm from '../components/dashboard/create-postback';
 import CreateStream from '../components/dashboard/create-stream';
 import GetPay from '../components/dashboard/get_pay';
 import Stats from '../components/dashboard/stats';
@@ -18,6 +19,7 @@ import Learning from '../pages/learning';
 import Levels from '../pages/levels';
 import Payout from '../pages/payout';
 import Postbacks from '../pages/postbacks';
+import Profile from '../pages/profile';
 import Recovery from '../pages/Recovery';
 import Ref from '../pages/ref';
 import Register from '../pages/register';
@@ -25,7 +27,6 @@ import Reviews from '../pages/reviews';
 import Streams from '../pages/Streams';
 import Tariffs from '../pages/tariffs';
 import Users from '../pages/users';
-import Profile from '../pages/profile';
 
 export const router = createBrowserRouter([
   {
@@ -137,6 +138,10 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/profile',
         element: <Profile />,
+      },
+      {
+        path: '/dashboard/postbacks/create',
+        element: <PostbackForm />,
       },
     ],
   },

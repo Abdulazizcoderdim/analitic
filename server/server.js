@@ -14,6 +14,7 @@ app.use(cookieParser());
 // Routes
 app.use('/api/auth', require('./routes/auth.route'));
 app.use('/api/streams', require('./routes/streams.route'));
+app.use('/api/postbacks', require('./routes/postbacks.route'));
 
 // Start server
 const bootstrap = async () => {
