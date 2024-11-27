@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const postbackSchema = new mongoose.Schema(
   {
     name: { type: String, default: '' },
