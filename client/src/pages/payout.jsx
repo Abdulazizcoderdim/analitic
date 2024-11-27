@@ -18,12 +18,18 @@ const Payout = () => {
 
         {/* Action Buttons */}
         <div className="flex flex-wrap gap-4 mb-8">
-          <button className="px-5 pb-2 pt-1.5 shadow-md bg-emerald-500 text-white rounded-full hover:bg-emerald-600 transition-colors flex items-center">
+          <Link
+            to={'/dashboard/payout/requisites'}
+            className="px-5 pb-2 pt-1.5 shadow-md bg-emerald-500 text-white rounded-full hover:bg-emerald-600 transition-colors flex items-center"
+          >
             Мои реквизиты
-          </button>
-          <button className="px-5 pb-2 pt-1.5 shadow-md bg-emerald-500 text-white rounded-full hover:bg-emerald-600 transition-colors">
+          </Link>
+          <Link
+            to={'/dashboard/payout/get_pay'}
+            className="px-5 pb-2 pt-1.5 shadow-md bg-emerald-500 text-white rounded-full hover:bg-emerald-600 transition-colors"
+          >
             <span className="mr-1">+</span> Заказать выплату
-          </button>
+          </Link>
         </div>
 
         {/* Content Area */}

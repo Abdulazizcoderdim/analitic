@@ -461,3 +461,39 @@ export const faqData = {
     },
   ],
 };
+
+export const allowedMethods = [
+  'Брокерский трафик',
+  'Дорвей-трафик',
+  'Контекстная реклама',
+  'Реклама в социальных сетях',
+  'Тизерные сети',
+  'Adult-трафик',
+  'Cashback',
+  'Email-рассылка (по своей базе, по согласованию)',
+  'PopUp / ClickUnder',
+  'YouTube-канал',
+];
+
+export const forbiddenMethods = [
+  'Email-spam',
+  'Контекстная реклама на бренд',
+  'Мотивированный трафик',
+  'Toolbar',
+  'Кукистаффинг',
+];
+
+export const datas = [
+  'Дополнительные параметры:',
+  '&cid= - click id',
+  '&sub1= - саб поток номер 1',
+  '&sub2= - саб поток номер 2',
+  '&sub3= - саб поток номер 3',
+  '&sub4= - саб поток номер 4',
+  '&sub5= - саб поток номер 5',
+  '&utm_source= - UTM метка',
+  '&utm_medium= - UTM метка',
+  '&utm_campaign= - UTM метка',
+  '&utm_content= - UTM метка',
+  '&utm_term= - UTM метка',
+];

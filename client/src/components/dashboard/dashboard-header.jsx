@@ -1,9 +1,12 @@
+import axios from 'axios';
 import { Menu } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import toast from 'react-hot-toast';
 import { CiCalendarDate } from 'react-icons/ci';
 import { IoPersonCircleOutline, IoPowerOutline } from 'react-icons/io5';
 import { MdPersonAddAlt1 } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { authStore } from '../../store/auth.store';
 import { stateDashboard } from '../../store/dashboard';
 import DashMobile from './dash-mobile';
 
@@ -11,6 +14,8 @@ const DashboardHeader = () => {
   const { isOpen, setOpen } = stateDashboard();
   const [modal, setModal] = useState(false);
   const ref = useRef(null);
+  const { setIsAuth, setUser } = authStore();
+  const navigate = useNavigate();
 
   const closeModal = e => {
     if (ref.current && !ref.current.contains(e.target)) {
@@ -25,9 +30,22 @@ const DashboardHeader = () => {
     };
   }, []);
 
+  const logout = async () => {
+    try {
+      await axios.post(`${import.meta.env.VITE_PUBLIC_API}/api/auth/logout`);
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('user');
+      setIsAuth(false);
+      setUser({});
+      navigate('/auth');
+    } catch (error) {
+      toast.error(error.response?.data?.message);
+    }
+  };
+
   return (
     <>
-      <div className="w-full fixed right-0 left-0 top-0">
+      <div className="w-full fixed right-0 left-0 top-0 z-20">
         <div className="flex justify-between bg-white max-md:bg-[#181722]">
           <div className="md:hidden flex items-center pl-5 gap-2">
             <div className="cursor-pointer" onClick={() => setOpen(true)}>
@@ -53,27 +71,27 @@ const DashboardHeader = () => {
                 >
                   <div className="flex flex-col py-2">
                     <Link
-                      to="#"
+                      to="/dashboard/profile"
                       className="flex items-center gap-2 py-2 px-4 hover:bg-gray-100/80 hover:text-blue-500"
                     >
                       <IoPersonCircleOutline size={20} />
                       <span>Профиль</span>
                     </Link>
                     <Link
-                      to="#"
+                      to="/dashboard/levels"
                       className="flex items-center gap-2 py-2 px-4 hover:bg-gray-100/80 hover:text-blue-500"
                     >
                       <CiCalendarDate size={20} />
                       <span>Отчисления</span>
                     </Link>
                     <div className="w-full bg-[#d5d6da] h-[0.5px]" />
-                    <Link
-                      to="#"
+                    <button
+                      onClick={logout}
                       className="flex items-center gap-2 py-2 px-4 hover:bg-gray-100/80 hover:text-blue-500"
                     >
                       <IoPowerOutline size={20} />
                       <span>Выход</span>
-                    </Link>
+                    </button>
                   </div>
                 </div>
               )}

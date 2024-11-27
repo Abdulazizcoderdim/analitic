@@ -1,11 +1,14 @@
 import { createBrowserRouter } from 'react-router-dom';
 import CreateStream from '../components/dashboard/create-stream';
+import GetPay from '../components/dashboard/get_pay';
+import Stats from '../components/dashboard/stats';
 import Layout from '../layout/layout';
 import LayoutDashboard from '../layout/layout-dashboard';
 import Auth from '../pages/Auth';
 import Contacts from '../pages/contacts';
 import ContactsDashboard from '../pages/contacts-dashboard';
 import Dashboard from '../pages/Dashboard';
+import EditStream from '../pages/edit-stream';
 import BookmakersTable from '../pages/firm';
 import Giveaway from '../pages/giveaway';
 import FAQPage from '../pages/help';
@@ -22,6 +25,7 @@ import Reviews from '../pages/reviews';
 import Streams from '../pages/Streams';
 import Tariffs from '../pages/tariffs';
 import Users from '../pages/users';
+import Profile from '../pages/profile';
 
 export const router = createBrowserRouter([
   {
@@ -117,6 +121,22 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/streams/create',
         element: <CreateStream />,
+      },
+      {
+        path: '/dashboard/streams/stats',
+        element: <Stats />,
+      },
+      {
+        path: '/dashboard/streams/edit/:id',
+        element: <EditStream />,
+      },
+      {
+        path: '/dashboard/payout/get_pay',
+        element: <GetPay />,
+      },
+      {
+        path: '/dashboard/profile',
+        element: <Profile />,
       },
     ],
   },

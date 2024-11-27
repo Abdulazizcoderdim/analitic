@@ -1,6 +1,33 @@
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { statistikaData } from '../../constants';
 
 const StatisticsTable = () => {
+  const { pathname } = useLocation();
+  // /dashboard/streams/stats
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchStreams = async () => {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_PUBLIC_API}/api/streams/get-all`
+        );
+        if (!response.ok) throw new Error('Malumotlarni yuklashda xatolik');
+        const data = await response.json();
+
+        setData(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchStreams();
+  }, []);
+
+  console.log(data);
+
   return (
     <div className="w-full overflow-x-auto bg-white shadow-md rounded-lg p-6 mt-7">
       <h2 className="text-lg font-medium text-[#3b3f5c] mb-4">
@@ -54,45 +81,87 @@ const StatisticsTable = () => {
           </tr>
         </thead>
         <tbody className="text-[#3b3f5c]">
-          {statistikaData.map((row, index) => (
-            <tr
-              key={row.date}
-              className={
-                index % 2 === 0
-                  ? 'bg-[#F2F6F9]'
-                  : ' hover:bg-[#F2F6F9] bg-white'
-              }
-            >
-              <td className="border px-2 py-3">{row.date}</td>
-              <td className="border px-2 py-3 text-center">{row.visits}</td>
-              <td className="border px-2 py-3 text-center">
-                <span className="cursor-pointer">{row.registrations}</span>
-              </td>
-              <td className="border px-2 py-3 text-center">
-                <span className="cursor-pointer">{row.activations}</span>
-              </td>
-              <td className="border px-2 py-3 text-center">{row.total}</td>
-              <td className="border px-2 py-3 text-center">{row.start}</td>
-              <td className="border px-2 py-3 text-center">{row.key}</td>
-              <td className="border px-2 py-3 text-center">{row.combo}</td>
-              <td className="border px-2 py-3 text-center">
-                {row.totalCancels}
-              </td>
-              <td className="border px-2 py-3 text-center">{row.keyCancels}</td>
-              <td className="border px-2 py-3 text-center">
-                {row.comboCancels}
-              </td>
-              <td className="border px-2 py-3 text-center">{row.successful}</td>
-              <td className="border px-2 py-3 text-center">{row.rebills}</td>
-              <td className="border px-2 py-3 text-center">{row.declined}</td>
-              <td className="border px-2 py-3 text-center">{row.refunds}</td>
-              <td className="border px-2 py-3 text-center">{row.total2}</td>
-            </tr>
-          ))}
+          {pathname === '/dashboard/streams/stats'
+            ? data.map((row, index) => (
+                <tr
+                  key={index}
+                  className={
+                    index % 2 === 0
+                      ? 'bg-[#F2F6F9]'
+                      : ' hover:bg-[#F2F6F9] bg-white'
+                  }
+                >
+                  <td className="border px-2 py-3">{row?.name}</td>
+                  <td className="border px-2 py-3 text-center">0</td>
+                  <td className="border px-2 py-3 text-center">
+                    <span className="cursor-pointer">0</span>
+                  </td>
+                  <td className="border px-2 py-3 text-center">
+                    <span className="cursor-pointer">0</span>
+                  </td>
+                  <td className="border px-2 py-3 text-center">0</td>
+                  <td className="border px-2 py-3 text-center">0</td>
+                  <td className="border px-2 py-3 text-center">0</td>
+                  <td className="border px-2 py-3 text-center">0</td>
+                  <td className="border px-2 py-3 text-center">0</td>
+                  <td className="border px-2 py-3 text-center">0</td>
+                  <td className="border px-2 py-3 text-center">0</td>
+                  <td className="border px-2 py-3 text-center">0</td>
+                  <td className="border px-2 py-3 text-center">0</td>
+                  <td className="border px-2 py-3 text-center">0</td>
+                  <td className="border px-2 py-3 text-center">0</td>
+                  <td className="border px-2 py-3 text-center">0</td>
+                </tr>
+              ))
+            : statistikaData.map((row, index) => (
+                <tr
+                  key={row.date}
+                  className={
+                    index % 2 === 0
+                      ? 'bg-[#F2F6F9]'
+                      : ' hover:bg-[#F2F6F9] bg-white'
+                  }
+                >
+                  <td className="border px-2 py-3">{row.date}</td>
+                  <td className="border px-2 py-3 text-center">{row.visits}</td>
+                  <td className="border px-2 py-3 text-center">
+                    <span className="cursor-pointer">{row.registrations}</span>
+                  </td>
+                  <td className="border px-2 py-3 text-center">
+                    <span className="cursor-pointer">{row.activations}</span>
+                  </td>
+                  <td className="border px-2 py-3 text-center">{row.total}</td>
+                  <td className="border px-2 py-3 text-center">{row.start}</td>
+                  <td className="border px-2 py-3 text-center">{row.key}</td>
+                  <td className="border px-2 py-3 text-center">{row.combo}</td>
+                  <td className="border px-2 py-3 text-center">
+                    {row.totalCancels}
+                  </td>
+                  <td className="border px-2 py-3 text-center">
+                    {row.keyCancels}
+                  </td>
+                  <td className="border px-2 py-3 text-center">
+                    {row.comboCancels}
+                  </td>
+                  <td className="border px-2 py-3 text-center">
+                    {row.successful}
+                  </td>
+                  <td className="border px-2 py-3 text-center">
+                    {row.rebills}
+                  </td>
+                  <td className="border px-2 py-3 text-center">
+                    {row.declined}
+                  </td>
+                  <td className="border px-2 py-3 text-center">
+                    {row.refunds}
+                  </td>
+                  <td className="border px-2 py-3 text-center">{row.total2}</td>
+                </tr>
+              ))}
         </tbody>
         <tfoot>
-          <tr className="bg-white font-medium">
-            <td className="border px-2 py-3 text-xs">Всего (на странице)</td>
+          <tr className="bg-white font-medium text-xs">
+            <td className="border px-2 py-3">Всего (на странице)</td>
             <td className="border px-2 py-3 text-center">0</td>
             <td className="border px-2 py-3 text-center">0</td>
             <td className="border px-2 py-3 text-center">0</td>

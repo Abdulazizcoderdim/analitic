@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import DashboardHeader from '../components/dashboard/dashboard-header';
 import DashboardSidebar from '../components/dashboard/dashboard-sidebar';
+import FooterDash from '../components/dashboard/footer-dash';
 
 const LayoutDashboard = () => {
   return (
@@ -9,6 +10,7 @@ const LayoutDashboard = () => {
       <main className="flex flex-col w-full">
         <DashboardHeader />
         <Outlet />
+        <FooterDash />
       </main>
     </div>
   );

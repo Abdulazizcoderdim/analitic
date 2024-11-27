@@ -1,7 +1,7 @@
-import StatisticsTable from '../components/dashboard/StatisticsTable';
-import Calendar from '../components/shared/Calendar';
+import Calendar from '../shared/Calendar';
+import StatisticsTable from './StatisticsTable';
 
-const Dashboard = () => {
+const Stats = () => {
   return (
     <div className="bg-[#E9ECEF] sm:pt-20 pt-24 px-5 w-full pb-20">
       <div className="">
@@ -81,4 +81,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Stats;
