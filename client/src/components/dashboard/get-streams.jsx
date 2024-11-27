@@ -47,7 +47,7 @@ export default function StreamList() {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-[200px]">
-        <div className="text-gray-500">Yuklanmoqda...</div>
+        <div className="text-gray-500">Загрузка ...</div>
       </div>
     );
   }

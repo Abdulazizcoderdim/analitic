@@ -1,7 +1,7 @@
 import { Home } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { postbackData } from '../../constants';
 
 export default function PostbackForm() {
@@ -17,6 +17,7 @@ export default function PostbackForm() {
       payment: false,
     },
   });
+  const navigate = useNavigate();
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -38,6 +39,8 @@ export default function PostbackForm() {
       } else {
         toast.error('Произошла ошибка!');
       }
+
+      navigate('/dashboard/postbacks');
     } catch (error) {
       console.error('Error:', error);
       toast.error('Ошибка подключения к серверу!');
@@ -68,7 +71,7 @@ export default function PostbackForm() {
     <div className="min-h-screen bg-[#E9ECEF] sm:pt-20 pt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-2xl font-semibold text-gray-900 mb-5">
-          Создать поток
+          Создать Postback
         </h1>
 
         {/* Breadcrumb */}
@@ -77,20 +80,20 @@ export default function PostbackForm() {
             <Home className="h-4 w-4" />
           </Link>
           <span className="text-gray-400">/</span>
-          <span className="text-gray-900 cursor-pointer">Создать поток</span>
+          <span className="text-gray-900 cursor-pointer">Создать Postback</span>
         </nav>
 
         {/* Action Buttons */}
         <Link
-          to={'/dashboard/streams'}
+          to={'/dashboard/postbacks'}
           className="px-5 w-fit pb-2 pt-1.5 mb-8 shadow-md bg-emerald-500 text-white rounded-full hover:bg-emerald-600 transition-colors flex items-center"
         >
-          Список потоков
+          Список Postback
         </Link>
 
         <div className="bg-white rounded-lg shadow-sm p-6">
           <h1 className="text-2xl font-semibold text-gray-800 mb-6">
-            Создание postback
+            Создание Postback
           </h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">

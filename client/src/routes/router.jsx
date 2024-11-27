@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import PostbackForm from '../components/dashboard/create-postback';
 import CreateStream from '../components/dashboard/create-stream';
+import EditPostbacks from '../components/dashboard/edit-postbacks';
 import GetPay from '../components/dashboard/get_pay';
 import Stats from '../components/dashboard/stats';
 import Layout from '../layout/layout';
@@ -142,6 +143,10 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/postbacks/create',
         element: <PostbackForm />,
+      },
+      {
+        path: '/dashboard/postbacks/edit/:id',
+        element: <EditPostbacks />,
       },
     ],
   },

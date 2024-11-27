@@ -1,7 +1,37 @@
 import { Home } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Postbacks = () => {
+  const [postbacks, setPostbacks] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchPostbacks();
+  }, []);
+
+  const fetchPostbacks = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_PUBLIC_API}/api/postbacks/get-all`
+      );
+      if (!response.ok) throw new Error('Malumotlarni yuklashda xatolik');
+      const data = await response.json();
+
+      setPostbacks(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const formatDate = dateString => {
+    const date = new Date(dateString);
+    return `${date.getDate()}.${
+      date.getMonth() + 1
+    }.${date.getFullYear()} в ${date.getHours()}:${String(
+      date.getMinutes()
+    ).padStart(2, '0')}`;
+  };
   return (
     <div className="min-h-screen bg-[#E9ECEF] sm:pt-20 pt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -47,14 +77,38 @@ const Postbacks = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td
-                    className="py-8 px-4 text-center text-gray-500"
-                    colSpan={4}
-                  >
-                    Постбеки еще не добавлены.
-                  </td>
-                </tr>
+                {postbacks.map((postback, i) => (
+                  <tr key={postback._id} className=" hover:bg-gray-50">
+                    <td className="py-1 px-4 text-gray-800">{250 + i}</td>
+                    <td className="py-1 px-4 text-gray-800">
+                      {postback.method}
+                    </td>
+                    <td className="py-1 px-4 text-gray-800">{postback.name}</td>
+                    <td className="py-1 px-4 text-gray-500">
+                      {formatDate(postback.createdAt)}
+                    </td>
+                    <td className="py-1 px-4">
+                      <button
+                        className="px-4 text-xs shadow-sm text-end py-2 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
+                        onClick={() =>
+                          navigate(`/dashboard/postbacks/edit/${postback._id}`)
+                        }
+                      >
+                        Настройки
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {postbacks.length === 0 && (
+                  <tr>
+                    <td
+                      className="py-8 px-4 text-center text-gray-500"
+                      colSpan={4}
+                    >
+                      Постбеки еще не добавлены.
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
