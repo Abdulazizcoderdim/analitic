@@ -23,7 +23,7 @@ export default function PostbackForm() {
 
     try {
       const response = await fetch(
-        'http://localhost:5000/api/postbacks/create',
+        `${import.meta.env.VITE_PUBLIC_API}/api/postbacks/create`,
         {
           method: 'POST',
           headers: {
