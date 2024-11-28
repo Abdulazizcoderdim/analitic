@@ -1,12 +1,11 @@
 import { Home } from 'lucide-react';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const [formData, setFormData] = useState({
     name: '',
-    emailOrPhone: 'Bakhodirovichshakhzodbek@gmail.com',
-    phone: '',
     telegram: '',
   });
   const [passwords, setPasswords] = useState({
@@ -23,15 +22,48 @@ const Profile = () => {
     }));
   };
 
-  const handleSubmit = e => {
+  const handlePasswordChange = async e => {
     e.preventDefault();
-    console.log('Form submitted with data:', formData);
+
+    // Validation for password fields
+    if (passwords.new !== passwords.confirm) {
+      toast.error('Пароли не совпадают');
+      return;
+    }
+    const userId = localStorage.getItem('userId');
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_PUBLIC_API}/api/auth/change-password`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId,
+            currentPassword: passwords.current,
+            newPassword: passwords.new,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Error changing password.');
+      }
+
+      toast.success('Пароль успешно изменен!');
+      setPasswords({ current: '', new: '', confirm: '' });
+    } catch (error) {
+      toast.error(
+        error.message || 'Не удалось изменить пароль. Попробуйте еще раз.'
+      );
+    }
   };
 
-  const handleSubmitEdit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    // Handle password change logic here
-    console.log('Password change submitted:', passwords);
   };
 
   return (
@@ -41,7 +73,7 @@ const Profile = () => {
 
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm mb-8 ml-4">
-          <Link href="/" className="text-gray-500 hover:text-gray-700">
+          <Link to="/" className="text-gray-500 hover:text-gray-700">
             <Home className="h-4 w-4" />
           </Link>
           <span className="text-gray-400">/</span>
@@ -51,6 +83,7 @@ const Profile = () => {
         <div className="bg-white rounded-lg shadow-sm px-4 py-10 max-w-6xl mx-auto">
           <h1 className="text-blue-500 text-lg font-medium mb-8">АККАУНТ</h1>
 
+          {/* Profile Form */}
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="space-y-2">
               <label htmlFor="name" className="block text-sm text-violet-500">
@@ -64,23 +97,6 @@ const Profile = () => {
                 onChange={handleChange}
                 placeholder="Имя"
                 className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <label
-                htmlFor="emailOrPhone"
-                className="block text-sm text-violet-500"
-              >
-                EMAIL ИЛИ НОМЕР ТЕЛЕФОНА
-              </label>
-              <input
-                id="emailOrPhone"
-                name="emailOrPhone"
-                type="text"
-                value={localStorage.getItem('user')}
-                disabled
-                className="w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-200"
               />
             </div>
 
@@ -115,12 +131,13 @@ const Profile = () => {
           </form>
         </div>
 
+        {/* Password Change Form */}
         <div className="bg-white rounded-lg shadow-sm px-4 py-10 max-w-6xl mx-auto mt-8">
           <h1 className="text-lg font-medium text-[#0066FF] mb-8">
             БЕЗОПАСНОСТЬ
           </h1>
 
-          <form onSubmit={handleSubmitEdit} className="space-y-6">
+          <form onSubmit={handlePasswordChange} className="space-y-6">
             <div className="space-y-2">
               <label className="block text-[#8B5CF6] text-sm font-normal">
                 ТЕКУЩИЙ ПАРОЛЬ

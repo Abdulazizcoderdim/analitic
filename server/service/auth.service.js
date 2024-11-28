@@ -53,6 +53,37 @@ class AuhtService {
 
     return { user: userDto, ...tokens };
   }
+
+  async editUser(userId, name, telegram) {
+    const user = await User.findOne({ _id: userId });
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    user.name = name || user.name || '';
+    user.telegram = telegram || user.telegram || '';
+
+    return await user.save();
+  }
+
+  async changePassword(userId, currentPassword, newPassword) {
+    const user = await User.findOne({ _id: userId });
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    const isPassword = await bcrypt.compare(currentPassword, user.password);
+
+    if (!isPassword) {
+      return res.status(400).json({ message: 'Current password is incorrect' });
+    }
+
+    user.password = await bcrypt.hash(newPassword, 10);
+
+    return await user.save();
+  }
 }
 
 module.exports = new AuhtService();

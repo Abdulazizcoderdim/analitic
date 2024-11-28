@@ -52,6 +52,36 @@ class AuthController {
       console.log(error);
     }
   }
+
+  async editUser(req, res) {
+    try {
+      const { name, telegram, userId } = req.body;
+
+      const user = await authService.editUser(userId, name, telegram);
+
+      return res.json(user);
+    } catch (error) {
+      res.status(500).json({ message: 'Server error' });
+      console.log(error);
+    }
+  }
+
+  async changePassword(req, res) {
+    try {
+      const { currentPassword, newPassword, userId } = req.body;
+
+      const user = await authService.changePassword(
+        userId,
+        currentPassword,
+        newPassword
+      );
+
+      return res.json(user);
+    } catch (error) {
+      res.status(500).json({ message: 'Server error' });
+      console.log(error);
+    }
+  }
 }
 
 module.exports = new AuthController();

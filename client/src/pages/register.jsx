@@ -7,6 +7,7 @@ const Register = () => {
   const [activeTab, setActiveTab] = useState('phone');
   const [contact, setContact] = useState('');
   const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState({});
   const [agreements, setAgreements] = useState({
     terms: false,
     subscription: false,
@@ -15,14 +16,60 @@ const Register = () => {
   const { setIsAuth, setUser } = authStore();
   const navigate = useNavigate();
 
+  // Validation functions
+  const validateContact = () => {
+    if (activeTab === 'phone') {
+      const phoneRegex = /^[0-9]{10,15}$/;
+      if (!phoneRegex.test(contact)) {
+        setErrors(prev => ({
+          ...prev,
+          contact: 'Введите корректный номер телефона.',
+        }));
+        return false;
+      }
+    } else {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(contact)) {
+        setErrors(prev => ({
+          ...prev,
+          contact: 'Введите корректный email.',
+        }));
+        return false;
+      }
+    }
+    setErrors(prev => ({ ...prev, contact: '' }));
+    return true;
+  };
+
+  const validatePassword = () => {
+    if (password.length < 6) {
+      setErrors(prev => ({
+        ...prev,
+        password: 'Пароль должен быть не менее 6 символов.',
+      }));
+      return false;
+    }
+    setErrors(prev => ({ ...prev, password: '' }));
+    return true;
+  };
+
+  const validateAgreements = () => {
+    if (!agreements.terms || !agreements.subscription) {
+      toast.error('Вы должны согласиться с правилами.');
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
 
-    // Validate agreements
-    if (!agreements.terms || !agreements.subscription) {
-      toast.success('Вы должны согласиться с правилами.');
-      return;
-    }
+    // Validate form fields
+    const isContactValid = validateContact();
+    const isPasswordValid = validatePassword();
+    const isAgreementsValid = validateAgreements();
+
+    if (!isContactValid || !isPasswordValid || !isAgreementsValid) return;
 
     // Build request body
     const requestBody = {
@@ -50,17 +97,15 @@ const Register = () => {
       }
 
       const data = await response.json();
-      // setSuccessMessage('Успешная регистрация!');
       toast.success('Успешная регистрация!');
 
       setUser(data.user);
       setIsAuth(true);
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('user', data.user.emailOrPhone);
-      console.log('API Response:', data);
+      localStorage.setItem('userId', data.user._id);
       navigate('/dashboard');
     } catch (error) {
-      console.log(error);
       toast.error(
         error.message || 'Ошибка при регистрации. Попробуйте еще раз.'
       );
@@ -108,22 +153,38 @@ const Register = () => {
               <input
                 type={activeTab === 'phone' ? 'tel' : 'email'}
                 placeholder={activeTab === 'phone' ? 'Номер телефона' : 'Email'}
-                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-teal-500"
+                className={`w-full px-4 py-3 border ${
+                  errors.contact ? 'border-red-500' : 'border-gray-300'
+                } rounded-md focus:outline-none focus:ring-1 ${
+                  errors.contact ? 'focus:ring-red-500' : 'focus:ring-teal-500'
+                }`}
                 value={contact}
                 onChange={e => setContact(e.target.value)}
+                onBlur={validateContact}
                 required
               />
+              {errors.contact && (
+                <p className="text-red-500 text-xs mt-1">{errors.contact}</p>
+              )}
             </div>
 
             <div>
               <input
                 type="password"
                 placeholder="Пароль"
-                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-teal-500"
+                className={`w-full px-4 py-3 border ${
+                  errors.password ? 'border-red-500' : 'border-gray-300'
+                } rounded-md focus:outline-none focus:ring-1 ${
+                  errors.password ? 'focus:ring-red-500' : 'focus:ring-teal-500'
+                }`}
                 value={password}
                 onChange={e => setPassword(e.target.value)}
+                onBlur={validatePassword}
                 required
               />
+              {errors.password && (
+                <p className="text-red-500 text-xs mt-1">{errors.password}</p>
+              )}
             </div>
 
             <div className="space-y-4">

@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import { CiCalendarDate } from 'react-icons/ci';
 import { IoPersonCircleOutline, IoPowerOutline } from 'react-icons/io5';
 import { MdPersonAddAlt1 } from 'react-icons/md';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { authStore } from '../../store/auth.store';
 import { stateDashboard } from '../../store/dashboard';
 import DashMobile from './dash-mobile';
@@ -17,6 +17,7 @@ const DashboardHeader = () => {
   const { setIsAuth, setUser } = authStore();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const { pathname } = useLocation();
 
   const closeModal = e => {
     if (ref.current && !ref.current.contains(e.target)) {
@@ -61,12 +62,19 @@ const DashboardHeader = () => {
               Баланс: 0.00
             </p>
             <div className="relative">
-              <div
-                onClick={() => setModal(prev => !prev)}
-                className="p-2 rounded-full bg-[#4f5163] text-white text-xl hover:bg-blue-700 cursor-pointer"
-              >
-                <MdPersonAddAlt1 />
+              <div className="flex items-center gap-2">
+                <div
+                  onClick={() => setModal(prev => !prev)}
+                  className="p-2 rounded-full bg-[#4f5163] text-white text-xl hover:bg-blue-700 cursor-pointer"
+                >
+                  <MdPersonAddAlt1 />
+                </div>
+                <p>
+                  {pathname === '/dashboard/profile' &&
+                    localStorage.getItem('user')}
+                </p>
               </div>
+
               {modal && (
                 <div
                   ref={ref}
