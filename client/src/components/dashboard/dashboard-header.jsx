@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Menu } from 'lucide-react';
+import { LoaderCircle, Menu } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
 import { CiCalendarDate } from 'react-icons/ci';
@@ -16,6 +16,7 @@ const DashboardHeader = () => {
   const ref = useRef(null);
   const { setIsAuth, setUser } = authStore();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const closeModal = e => {
     if (ref.current && !ref.current.contains(e.target)) {
@@ -32,12 +33,14 @@ const DashboardHeader = () => {
 
   const logout = async () => {
     try {
+      setLoading(true);
       await axios.post(`${import.meta.env.VITE_PUBLIC_API}/api/auth/logout`);
       localStorage.removeItem('accessToken');
       localStorage.removeItem('user');
       setIsAuth(false);
       setUser({});
       navigate('/auth');
+      setLoading(false);
     } catch (error) {
       toast.error(error.response?.data?.message);
     }
@@ -89,8 +92,17 @@ const DashboardHeader = () => {
                       onClick={logout}
                       className="flex items-center gap-2 py-2 px-4 hover:bg-gray-100/80 hover:text-blue-500"
                     >
-                      <IoPowerOutline size={20} />
-                      <span>Выход</span>
+                      {loading ? (
+                        <div className="flex items-center gap-2 text-gray-400">
+                          <LoaderCircle size={20} className="animate-spin" />
+                          <span>Загрузка...</span>
+                        </div>
+                      ) : (
+                        <>
+                          <IoPowerOutline size={20} />
+                          <span>Выход</span>
+                        </>
+                      )}
                     </button>
                   </div>
                 </div>
