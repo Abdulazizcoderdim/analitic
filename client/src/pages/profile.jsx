@@ -13,6 +13,8 @@ const Profile = () => {
     new: '',
     confirm: '',
   });
+  const [loading1, setLoading1] = useState(false);
+  const [loading2, setLoading2] = useState(false);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -37,8 +39,9 @@ const Profile = () => {
     }
 
     try {
+      setLoading2(true);
       const response = await fetch(
-        `http://localhost:5000/api/auth/change-password`,
+        `${import.meta.env.VITE_PUBLIC_API}/api/auth/change-password`,
         {
           method: 'POST',
           headers: {
@@ -59,6 +62,7 @@ const Profile = () => {
 
       toast.success('Пароль успешно изменен!');
       setPasswords({ current: '', new: '', confirm: '' });
+      setLoading2(false);
     } catch (error) {
       toast.error(
         error.message || 'Не удалось изменить пароль. Попробуйте еще раз.'
@@ -69,6 +73,7 @@ const Profile = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
+      setLoading1(true);
       const res = await fetch(
         `${import.meta.env.VITE_PUBLIC_API}/api/auth/edit-user`,
         {
@@ -76,7 +81,11 @@ const Profile = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(formData),
+          body: {
+            name: formData.name,
+            telegram: formData.telegram,
+            userId: localStorage.getItem('userId'),
+          },
         }
       );
 
@@ -85,7 +94,9 @@ const Profile = () => {
         throw new Error(errorData.message || 'Error editing user.');
       }
 
-
+      toast.success('Профиль успешно изменен!');
+      setFormData({ name: '', telegram: '' });
+      setLoading1(false);
     } catch (error) {
       console.log(error);
     }
@@ -167,7 +178,7 @@ const Profile = () => {
                 type="submit"
                 className="px-8 py-2 bg-[#FF7B4D] hover:bg-[#ff6a35] text-white rounded-full transition-colors"
               >
-                Сохранить
+                {loading1 ? 'Сохранение...' : 'Сохранить'}
               </button>
             </div>
           </form>
@@ -230,7 +241,7 @@ const Profile = () => {
                 type="submit"
                 className="px-6 py-2 bg-[#FF7A50] hover:bg-[#FF6B3D] text-white rounded-full transition-colors duration-200"
               >
-                Сохранить
+                {loading2 ? 'Сохранение...' : 'Сохранить'}
               </button>
             </div>
           </form>
