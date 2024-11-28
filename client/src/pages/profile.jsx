@@ -31,10 +31,14 @@ const Profile = () => {
       return;
     }
     const userId = localStorage.getItem('userId');
+    if (!userId) {
+      toast.error('User ID not found');
+      return;
+    }
 
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_PUBLIC_API}/api/auth/change-password`,
+        `http://localhost:5000/api/auth/change-password`,
         {
           method: 'POST',
           headers: {
@@ -64,6 +68,27 @@ const Profile = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_PUBLIC_API}/api/auth/edit-user`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || 'Error editing user.');
+      }
+
+
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -97,6 +122,23 @@ const Profile = () => {
                 onChange={handleChange}
                 placeholder="Имя"
                 className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label
+                htmlFor="emailOrPhone"
+                className="block text-sm text-violet-500"
+              >
+                EMAIL ИЛИ НОМЕР ТЕЛЕФОНА
+              </label>
+              <input
+                id="emailOrPhone"
+                name="emailOrPhone"
+                type="text"
+                value={localStorage.getItem('user')}
+                disabled
+                className="w-full text-gray-500 px-4 py-2 rounded-lg bg-gray-100 border border-gray-200"
               />
             </div>
 

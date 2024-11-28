@@ -40,6 +40,7 @@ export default function Auth() {
       setUser(data.user);
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('user', data.user.emailOrPhone);
+      localStorage.setItem('userId', data.user.id);
       toast.success('Вы успешно вошли в систему!');
       navigate('/dashboard');
     } catch (err) {

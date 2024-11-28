@@ -70,6 +70,12 @@ class AuthController {
     try {
       const { currentPassword, newPassword, userId } = req.body;
 
+      console.log('Received data:', {
+        userId,
+        currentPassword,
+        newPassword,
+      });
+
       const user = await authService.changePassword(
         userId,
         currentPassword,

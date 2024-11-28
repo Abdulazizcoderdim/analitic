@@ -82,7 +82,8 @@ class AuhtService {
 
     user.password = await bcrypt.hash(newPassword, 10);
 
-    return await user.save();
+    await user.save();
+    return { message: 'Password updated successfully' };
   }
 }
 

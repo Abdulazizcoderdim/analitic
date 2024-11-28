@@ -103,7 +103,7 @@ const Register = () => {
       setIsAuth(true);
       localStorage.setItem('accessToken', data.accessToken);
       localStorage.setItem('user', data.user.emailOrPhone);
-      localStorage.setItem('userId', data.user._id);
+      localStorage.setItem('userId', data.user.id);
       navigate('/dashboard');
     } catch (error) {
       toast.error(
