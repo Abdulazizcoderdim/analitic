@@ -19,7 +19,7 @@ const Payout = () => {
         {/* Action Buttons */}
         <div className="flex flex-wrap gap-4 mb-8">
           <Link
-            to={'/dashboard/payout/requisites'}
+            to={'#'}
             className="px-5 pb-2 pt-1.5 shadow-md bg-emerald-500 text-white rounded-full hover:bg-emerald-600 transition-colors flex items-center"
           >
             Мои реквизиты
