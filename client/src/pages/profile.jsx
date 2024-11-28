@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { Home } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
@@ -74,24 +75,17 @@ const Profile = () => {
     e.preventDefault();
     try {
       setLoading1(true);
-      const res = await fetch(
-        `${import.meta.env.VITE_PUBLIC_API}/api/auth/edit-user`,
+      const res = await axios.put(
+        `${import.meta.env.VITE_PUBLIC_API}/api/auth/edit`,
         {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: {
-            name: formData.name,
-            telegram: formData.telegram,
-            userId: localStorage.getItem('userId'),
-          },
+          userId: localStorage.getItem('userId'),
+          name: formData.name,
+          telegram: formData.telegram,
         }
       );
 
-      if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.message || 'Error editing user.');
+      if (!res.data) {
+        throw new Error('Error editing user');
       }
 
       toast.success('Профиль успешно изменен!');
