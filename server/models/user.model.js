@@ -10,6 +10,12 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
     },
+    name: {
+      type: String,
+    },
+    telegram: {
+      type: String,
+    },
     isActivated: {
       type: Boolean,
       default: false,

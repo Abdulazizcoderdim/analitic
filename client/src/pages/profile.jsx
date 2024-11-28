@@ -78,7 +78,7 @@ const Profile = () => {
                 id="emailOrPhone"
                 name="emailOrPhone"
                 type="text"
-                value={formData.emailOrPhone}
+                value={localStorage.getItem('user')}
                 disabled
                 className="w-full px-4 py-2 rounded-lg bg-gray-100 border border-gray-200"
               />
