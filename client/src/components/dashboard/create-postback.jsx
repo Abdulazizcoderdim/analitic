@@ -18,11 +18,13 @@ export default function PostbackForm() {
     },
   });
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async e => {
     e.preventDefault();
 
     try {
+      setLoading(true);
       const response = await fetch(
         `${import.meta.env.VITE_PUBLIC_API}/api/postbacks/create`,
         {
@@ -40,6 +42,7 @@ export default function PostbackForm() {
         toast.error('Произошла ошибка!');
       }
 
+      setLoading(false);
       navigate('/dashboard/postbacks');
     } catch (error) {
       console.error('Error:', error);
@@ -189,7 +192,7 @@ export default function PostbackForm() {
               type="submit"
               className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
             >
-              Добавить
+              {loading ? 'Загрузка...' : 'Добавить'}
             </button>
           </form>
 

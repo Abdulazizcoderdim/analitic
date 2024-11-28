@@ -4,15 +4,11 @@ import { FaPhone } from 'react-icons/fa';
 import { FiMenu } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import { navItems } from '../constants';
-import { authStore } from '../store/auth.store';
-import Dropdown from './shared/drop-down';
 import MaxWidth from './shared/max-width';
 
 const Header = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-
-  const { isAuth } = authStore();
 
   return (
     <>
@@ -46,16 +42,12 @@ const Header = () => {
                 <BiLogoTelegram />
                 @aa_manager
               </Link>
-              {isAuth ? (
-                <Dropdown />
-              ) : (
-                <Link
-                  to={'/auth'}
-                  className="border-2 border-brown rounded-lg  px-7 py-2 font-normal text-lg hover:bg-brown transition-all duration-300"
-                >
-                  Войти
-                </Link>
-              )}
+              <Link
+                to={'/auth'}
+                className="border-2 border-brown rounded-lg  px-7 py-2 font-normal text-lg hover:bg-brown transition-all duration-300"
+              >
+                Войти
+              </Link>
             </div>
           </div>
         </header>
