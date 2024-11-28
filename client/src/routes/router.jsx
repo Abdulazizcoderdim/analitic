@@ -1,7 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import PostbackForm from '../components/dashboard/create-postback';
 import CreateStream from '../components/dashboard/create-stream';
-import EditPostbacks from '../components/dashboard/edit-postbacks';
 import GetPay from '../components/dashboard/get_pay';
 import Stats from '../components/dashboard/stats';
 import Layout from '../layout/layout';
@@ -28,6 +27,7 @@ import Reviews from '../pages/reviews';
 import Streams from '../pages/Streams';
 import Tariffs from '../pages/tariffs';
 import Users from '../pages/users';
+import EditPostback from '../components/dashboard/edit-postbacks';
 
 export const router = createBrowserRouter([
   {
@@ -146,7 +146,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/dashboard/postbacks/edit/:id',
-        element: <EditPostbacks />,
+        element: <EditPostback />,
       },
     ],
   },

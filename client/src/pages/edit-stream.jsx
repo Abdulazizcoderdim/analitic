@@ -10,11 +10,25 @@ const EditStream = () => {
   const { id } = useParams();
   const [trial, setTrial] = useState(data?.trialDays);
   const [loading, setLoading] = useState(false);
+  const [postbacks, setPostbacks] = useState([]);
+
+  const fetchPostbacks = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_PUBLIC_API}/api/postbacks/get-all`
+      );
+      if (!response.ok) throw new Error('Malumotlarni yuklashda xatolik');
+      const data = await response.json();
+
+      setPostbacks(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     const fetchStreams = async () => {
       try {
-        setData(true);
         const response = await fetch(
           `${import.meta.env.VITE_PUBLIC_API}/api/streams/get-one/${id}`
         );
@@ -29,6 +43,7 @@ const EditStream = () => {
     };
 
     fetchStreams();
+    fetchPostbacks();
   }, [id]);
 
   const editStream = async () => {
@@ -190,11 +205,22 @@ const EditStream = () => {
               <div className="flex items-center justify-between gap-4 border-b pb-3">
                 <p>Postback</p>
                 <Link
-                  to={'#'}
+                  to={'/dashboard/postbacks'}
                   className="bg-[#E9ECEF] px-4 py-1 rounded-sm hover:bg-gray-200 transition text-gray-500 text-sm shadow-md"
                 >
                   Управление Postback
                 </Link>
+              </div>
+              {/* postbacks */}
+              <div className="max-w-md mx-auto mt-4">
+                {postbacks.map((postback, index) => (
+                  <div key={index} className="flex items-center gap-4">
+                    <input type="checkbox" />
+                    <p className="text-sm text-[#888da8]">
+                      <span>#{250 + index}</span> - <span>{postback.name}</span>
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
             <div className="w-full bg-white rounded-lg shadow-sm p-4">
