@@ -14,7 +14,7 @@ class StreamsController {
 
   async getStreams(req, res) {
     try {
-      const streams = await Stream.find();
+      const streams = await Stream.find().populate('author');
       return res.json(streams);
     } catch (error) {
       res.status(500).json({ message: 'Server error' });

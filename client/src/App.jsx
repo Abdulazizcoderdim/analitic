@@ -10,7 +10,6 @@ const App = () => {
   useEffect(() => {
     if (localStorage.getItem('accessToken')) {
       setIsAuth(true);
-      router.navigate('/dashboard');
     }
   }, []);
 
