@@ -1,3 +1,4 @@
+import { LoaderCircle } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
@@ -112,7 +113,13 @@ export default function Auth() {
               type="submit"
               className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-4 rounded-md transition-colors"
             >
-              {loading ? 'Загрузка...' : 'Вход на сайт'}
+              {loading ? (
+                <div className="flex items-center justify-center">
+                  <LoaderCircle className="animate-spin mr-2" /> Загрузка...
+                </div>
+              ) : (
+                'Вход на сайт'
+              )}
             </button>
           </form>
 

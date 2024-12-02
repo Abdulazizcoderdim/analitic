@@ -1,3 +1,4 @@
+import { LoaderCircle } from 'lucide-react';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
@@ -230,7 +231,14 @@ const Register = () => {
               className="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-4 rounded-md transition-colors"
               disabled={loading}
             >
-              {loading ? 'Отправка...' : 'Зарегистрироваться'}
+              {loading ? (
+                <div className="flex items-center justify-center">
+                  <LoaderCircle className="animate-spin mr-2" />
+                  Загрузка...
+                </div>
+              ) : (
+                'Зарегистрироваться'
+              )}
             </button>
           </form>
 
