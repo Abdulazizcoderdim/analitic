@@ -55,7 +55,7 @@ const DashboardHeader = () => {
             <div className="cursor-pointer" onClick={() => setOpen(true)}>
               <Menu className="text-white text-2xl" />
             </div>
-            <img src="/logodash.png" width={147} alt="logo" />
+            <img loading="lazy" src="/logodash.png" width={147} alt="logo" />
           </div>
           <div className="text-end w-full flex items-center justify-end py-3 pr-5">
             <p className="mr-4 text-2xl text-[#4f5163] font-normal">

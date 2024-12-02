@@ -105,7 +105,13 @@ const Giveaway = () => {
         <MaxWidth className="flex justify-between max-md:flex-col gap-5 items-center relative overflow-auto">
           <div className="md:w-1/2 space-y-5">
             <div className="text-center">
-              <img src="/regi.gif" width={350} className="mx-auto" alt="" />
+              <img
+                loading="lazy"
+                src="/regi.gif"
+                width={350}
+                className="mx-auto"
+                alt=""
+              />
               <p className="uppercase font-bold text-white">
                 <span className="text-[#215658] font-extrabold text-9xl">
                   1
@@ -118,7 +124,13 @@ const Giveaway = () => {
               </p>
             </div>
             <div className="text-center">
-              <img src="/pob.gif" width={350} className="mx-auto" alt="" />
+              <img
+                loading="lazy"
+                src="/pob.gif"
+                width={350}
+                className="mx-auto"
+                alt=""
+              />
               <p className="uppercase font-bold text-white">
                 <span className="text-[#215658] font-extrabold text-9xl">
                   3
@@ -180,6 +192,7 @@ const Giveaway = () => {
 
           <div className="mt-8 md:mt-0 relative">
             <img
+              loading="lazy"
               src="/til.gif"
               alt="Animated character with money"
               className="w-96 h-96 object-cover"
@@ -254,6 +267,7 @@ const Giveaway = () => {
 
             <div className="w-full md:w-1/3 h-full flex justify-center md:justify-end">
               <img
+                loading="lazy"
                 src="/logo.webp"
                 alt="Analitic BET Logo"
                 className="w-64 h-auto object-contain"

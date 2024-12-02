@@ -148,7 +148,7 @@ const EditStream = () => {
               <div className="flex items-center gap-3 max-w-md w-full">
                 <div className="">
                   <p className="text-[#888da8]">Главная страницы</p>
-                  <img src="/land-1.jpg" alt="" />
+                  <img loading="lazy" src="/land-1.jpg" alt="" />
                   <div className="mt-2 text-center">
                     <button
                       onClick={() => setActive('Главная страницы')}
@@ -164,7 +164,7 @@ const EditStream = () => {
                 </div>
                 <div className="">
                   <p className="text-[#888da8]">Страница регистрации</p>
-                  <img src="/land-2.jpg" alt="" />
+                  <img loading="lazy" src="/land-2.jpg" alt="" />
                   <div className="mt-2 text-center">
                     <button
                       onClick={() => setActive('Страница регистрации')}

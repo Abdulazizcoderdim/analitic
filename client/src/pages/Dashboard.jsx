@@ -10,7 +10,13 @@ const Dashboard = () => {
           <div className="bg-white p-6 rounded-md shadow-md">
             <div className="flex justify-between">
               <div className="">
-                <img src="/a1.png" width={50} height={50} alt="logo" />
+                <img
+                  loading="lazy"
+                  src="/a1.png"
+                  width={50}
+                  height={50}
+                  alt="logo"
+                />
               </div>
               <div className="flex flex-col text-[#888da8] text-lg font-bold">
                 <p>Пользователи</p>
@@ -24,7 +30,13 @@ const Dashboard = () => {
           <div className="bg-white p-6 rounded-md shadow-md">
             <div className="flex justify-between">
               <div className="">
-                <img src="/a2.png" width={50} height={50} alt="logo" />
+                <img
+                  loading="lazy"
+                  src="/a2.png"
+                  width={50}
+                  height={50}
+                  alt="logo"
+                />
               </div>
               <div className="flex flex-col text-[#888da8] text-lg text-end font-bold">
                 <p>Действующие подписки</p>
@@ -43,7 +55,13 @@ const Dashboard = () => {
           <div className="bg-white p-6 rounded-md shadow-md">
             <div className="flex justify-between">
               <div className="">
-                <img src="/a3.png" width={50} height={50} alt="logo" />
+                <img
+                  loading="lazy"
+                  src="/a3.png"
+                  width={50}
+                  height={50}
+                  alt="logo"
+                />
               </div>
               <div className="flex flex-col text-[#888da8] text-xl text-end font-bold">
                 <p>Отписки</p>
@@ -62,7 +80,13 @@ const Dashboard = () => {
           <div className="bg-white p-6 rounded-md shadow-md">
             <div className="flex justify-between">
               <div className="">
-                <img src="/a4.png" width={50} height={50} alt="logo" />
+                <img
+                  loading="lazy"
+                  src="/a4.png"
+                  width={50}
+                  height={50}
+                  alt="logo"
+                />
               </div>
               <div className="flex flex-col text-[#888da8] text-xl text-end font-bold">
                 <p>Заработано сегодня</p>
