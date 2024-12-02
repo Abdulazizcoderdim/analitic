@@ -1,14 +1,4 @@
-import {
-  Gem,
-  LaptopMinimal,
-  Layers,
-  Lightbulb,
-  MessageSquareText,
-  Redo,
-  RussianRuble,
-  SquareUserRound,
-  Users,
-} from 'lucide-react';
+import { Gem, LaptopMinimal, Layers, Redo, Users } from 'lucide-react';
 
 export const navItems = [
   {
@@ -134,26 +124,26 @@ export const dashboardMenu = [
     link: '/dashboard/payout',
     icon: Gem,
   },
-  {
-    title: 'Приведи друга',
-    link: '/dashboard/ref',
-    icon: SquareUserRound,
-  },
-  {
-    title: 'Уровни отчислений',
-    link: '/dashboard/levels',
-    icon: RussianRuble,
-  },
-  {
-    title: 'Вопросы и ответы',
-    link: '/dashboard/help',
-    icon: Lightbulb,
-  },
-  {
-    title: 'Поддержка',
-    link: '/dashboard/contacts',
-    icon: MessageSquareText,
-  },
+  // {
+  //   title: 'Приведи друга',
+  //   link: '/dashboard/ref',
+  //   icon: SquareUserRound,
+  // },
+  // {
+  //   title: 'Уровни отчислений',
+  //   link: '/dashboard/levels',
+  //   icon: RussianRuble,
+  // },
+  // {
+  //   title: 'Вопросы и ответы',
+  //   link: '/dashboard/help',
+  //   icon: Lightbulb,
+  // },
+  // {
+  //   title: 'Поддержка',
+  //   link: '/dashboard/contacts',
+  //   icon: MessageSquareText,
+  // },
 ];
 
 export const statistikaData = [

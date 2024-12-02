@@ -1,9 +1,18 @@
-import { Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import DashboardHeader from '../components/dashboard/dashboard-header';
 import DashboardSidebar from '../components/dashboard/dashboard-sidebar';
 import FooterDash from '../components/dashboard/footer-dash';
 
 const LayoutDashboard = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem('accessToken') === null) {
+      navigate('/auth');
+    }
+  }, []);
+
   return (
     <div className="flex">
       <DashboardSidebar />

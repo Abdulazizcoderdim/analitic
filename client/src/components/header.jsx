@@ -36,18 +36,27 @@ const Header = () => {
             </div>
             <div className="flex items-center gap-4">
               <Link
-                to={'https://t.me/aa_manager'}
+                to={'https://t.me/zuneros'}
                 className="flex items-center gap-1 text-lg font-bold hover:underline cursor-pointer"
               >
                 <BiLogoTelegram />
-                @aa_manager
+                @zuneros
               </Link>
-              <Link
-                to={'/auth'}
-                className="border-2 border-brown rounded-lg  px-7 py-2 font-normal text-lg hover:bg-brown transition-all duration-300"
-              >
-                Войти
-              </Link>
+              {localStorage.getItem('accessToken') ? (
+                <Link
+                  to={'/dashboard'}
+                  className="border-2 border-brown rounded-lg  px-7 py-2 font-normal text-lg hover:bg-brown transition-all duration-300"
+                >
+                  Dashboard
+                </Link>
+              ) : (
+                <Link
+                  to={'/auth'}
+                  className="border-2 border-brown rounded-lg  px-7 py-2 font-normal text-lg hover:bg-brown transition-all duration-300"
+                >
+                  Войти
+                </Link>
+              )}
             </div>
           </div>
         </header>
@@ -76,8 +85,8 @@ const Header = () => {
           <div className="md:hidden space-y-2 min-h-64 px-4 w-full transition-all duration-200 text-white ">
             <ul className="space-y-2 ">
               <li className="hover:opacity-100 opacity-80 cursor-pointer text-lg">
-                <Link to="/contacts">
-                  Telegram: <span className="font-bold">@aa_manager</span>
+                <Link to="https://t.me/zuneros ">
+                  Telegram: <span className="font-bold">@zuneros</span>
                 </Link>
               </li>
               <li className="hover:opacity-100 opacity-80 cursor-pointer text-sm">
