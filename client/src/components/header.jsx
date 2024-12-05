@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { BiLogoTelegram } from 'react-icons/bi';
-import { FaPhone } from 'react-icons/fa';
 import { FiMenu } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 import { navItems } from '../constants';
@@ -13,35 +12,31 @@ const Header = () => {
   return (
     <>
       <MaxWidth className="bg-[#0D2324]">
-        <header className="flex items-center justify-between gap-3 py-6">
+        <header className="flex items-center justify-between gap-3">
           <img
             onClick={() => navigate('/')}
             loading="lazy"
-            src="/logo.webp"
-            width={220}
-            height={100}
+            src="/white_on_trans.png"
             alt="logo"
-            className="max-md:mx-auto cursor-pointer"
+            className="max-md:mx-auto w-36 h-32 cursor-pointer object-cover"
           />
 
           <div className="flex items-center gap-8 text-white max-md:hidden">
             <div className="flex flex-col">
               <p className="flex items-center gap-1 hover:underline cursor-pointer">
-                <FaPhone />
-                +7 (495) 414-33-19
+                <Link
+                  to={'https://t.me/zuneros'}
+                  className="flex items-center gap-1 text-lg font-bold hover:underline cursor-pointer"
+                >
+                  <BiLogoTelegram />
+                  @zuneros
+                </Link>
               </p>
               <p className="text-xs text-brown font-normal">
                 Пн-пт: с 10:00 до 19:00 (Мск)
               </p>
             </div>
             <div className="flex items-center gap-4">
-              <Link
-                to={'https://t.me/zuneros'}
-                className="flex items-center gap-1 text-lg font-bold hover:underline cursor-pointer"
-              >
-                <BiLogoTelegram />
-                @zuneros
-              </Link>
               {localStorage.getItem('accessToken') ? (
                 <Link
                   to={'/dashboard'}
@@ -90,7 +85,7 @@ const Header = () => {
                 </Link>
               </li>
               <li className="hover:opacity-100 opacity-80 cursor-pointer text-sm">
-                +7 (495) 414-33-19 Пн-пт: с 10:00 до 19:00 (Мск) Войти
+                Пн-пт: с 10:00 до 19:00 (Мск) Войти
               </li>
               <li className="hover:opacity-100 opacity-80 cursor-pointer text-lg">
                 <Link to="/auth">Войти</Link>
