@@ -56,7 +56,7 @@ const Contacts = () => {
                 г. Москва, ул. Большая Полянка 51А/9
               </span>
             </div>
-            <div>
+            {/* <div>
               <h2 className="mb-2 text-sm font-medium uppercase text-gray-500">
                 ТЕЛЕФОН
               </h2>
@@ -68,7 +68,7 @@ const Contacts = () => {
                   (Пн-пт: с 11:00 до 19:00 (Мск))
                 </div>
               </div>
-            </div>
+            </div> */}
             <div>
               <h2 className="mb-2 text-sm font-medium uppercase text-gray-500">
                 TELEGRAM-БОТ
