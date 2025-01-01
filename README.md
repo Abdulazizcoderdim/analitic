@@ -2,6 +2,8 @@
 
 ## Project Overview
 
+https://standbet.ru
+
 Analiticbet is a comprehensive betting analytics platform that helps users make informed decisions about sports betting. The platform consists of two main components: a client-side React application and a server-side API.
 
 ## Client Application
